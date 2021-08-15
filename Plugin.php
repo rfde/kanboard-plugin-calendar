@@ -29,7 +29,6 @@ class Plugin extends Base
         $this->hook->on('template:layout:css', array('template' => 'plugins/Calendar/Assets/fullcalendar/main.min.css'));
         $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/fullcalendar/main.min.js'));
         $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/fullcalendar/locales-all.min.js'));
-        $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/moment.min.js'));
         $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/calendar.js'));
         $this->hook->on('template:layout:css', array('template' => 'plugins/Calendar/Assets/calendar.css'));
     }
