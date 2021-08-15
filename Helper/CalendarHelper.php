@@ -24,6 +24,7 @@ class CalendarHelper extends Base
         $params = array(
             'checkUrl' => $checkUrl,
             'saveUrl' => $saveUrl,
+            'locale' => strtolower($this->languageModel->getJsLanguageCode()),
         );
 
         return '<div class="js-calendar" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';

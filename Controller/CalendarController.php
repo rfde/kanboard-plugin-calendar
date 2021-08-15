@@ -111,11 +111,28 @@ class CalendarController extends BaseController
     {
         if ($this->request->isAjax() && $this->request->isPost()) {
             $values = $this->request->getJson();
-
-            $this->taskModificationModel->update(array(
-                'id' => $values['task_id'],
-                'date_due' => substr($values['date_due'], 0, 10),
-            ));
+            if (
+                $values['evt_end'] === NULL
+                && $values['evt_start'] !== NULL
+            ) {
+                // events with a due date but no start date only a start timestamp
+                // in the calendar's model and are classified as an all-day event.
+                $this->taskModificationModel->update(array(
+                    'id' => $values['id'],
+                    'date_due' => strtotime($values["evt_start"]),
+                    'date_started' => NULL
+                ));
+            } elseif (
+                $values['evt_end'] !== NULL
+                && $values['evt_start'] !== NULL
+            ) {
+                // if we have both start and due date, update the task accordingly.
+                $this->taskModificationModel->update(array(
+                    'id' => $values['id'],
+                    'date_started' => strtotime($values["evt_start"]),
+                    'date_due' => strtotime($values["evt_end"])
+                ));
+            }
         }
     }
 

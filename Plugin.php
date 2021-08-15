@@ -26,11 +26,12 @@ class Plugin extends Base
         $this->template->hook->attach('template:project-header:view-switcher', 'Calendar:project_header/views');
         $this->template->hook->attach('template:config:sidebar', 'Calendar:config/sidebar');
 
-        $this->hook->on('template:layout:css', array('template' => 'plugins/Calendar/Assets/fullcalendar.min.css'));
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Calendar/Assets/fullcalendar/main.min.css'));
+        $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/fullcalendar/main.min.js'));
+        $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/fullcalendar/locales-all.min.js'));
         $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/moment.min.js'));
-        $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/fullcalendar.min.js'));
-        $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/locale-all.js'));
         $this->hook->on('template:layout:js', array('template' => 'plugins/Calendar/Assets/calendar.js'));
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Calendar/Assets/calendar.css'));
     }
 
     public function onStartup()

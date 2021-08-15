@@ -1,0 +1,12 @@
+div.js-calendar table {
+	margin: unset;
+}
+div.js-calendar a {
+	color: unset;
+}
+td.fc-day-other {
+	background-color: #eee;
+}
+.fc-timegrid-now-indicator-container {
+	overflow: visible !important;
+}
