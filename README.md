@@ -1,6 +1,8 @@
 Calendar Plugin
 ===============
 
+**(forked from [gitlab.com/smacz/kanboard-plugin-calendar@f37e7e73](https://gitlab.com/smacz/kanboard-plugin-calendar/-/tree/f37e7e739bd6d463b1c3dfbf74b9db7a75427db1))**
+
 Embedded calendar view for Kanboard.
 
 Author
