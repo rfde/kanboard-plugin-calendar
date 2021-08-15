@@ -15,7 +15,6 @@ KB.component('calendar', function (containerElement, options) {
             locale: options.locale,
             initialView: mode,
             nowIndicator: true,
-            
             headerToolbar: {
                 start: "prev,next today",
                 center: "title",
@@ -76,6 +75,41 @@ KB.component('calendar', function (containerElement, options) {
             }
         });
         calendar.render();
+        var tasklistContainer = document.getElementById('calendar-tasklist');
+        if (tasklistContainer != null) {
+            calendar.setOption('eventReceive', function(info) {
+                console.log(info);
+                var id = info.draggedEl.getAttribute("data-id");
+                if (id != null) {
+                    var changes = {
+                        "id": id,
+                        "evt_start": info.event.start,
+                        "evt_end": null,
+                        "allDay": info.event.allDay
+                    }
+                    $.ajax({
+                        cache: false,
+                        url: options.saveUrl,
+                        contentType: "application/json",
+                        type: "POST",
+                        processData: false,
+                        data: JSON.stringify(changes),
+                        success: function() { calendar.refetchEvents(); }
+                    });
+                    info.revert();
+                    info.draggedEl.parentNode.removeChild(info.draggedEl);
+                }
+            });
+            // initialize draggable events
+            new FullCalendar.Draggable(tasklistContainer, {
+              itemSelector: '.fc-event',
+              eventData: function(eventEl) {
+                return {
+                  title: eventEl.innerText
+                };
+              }
+            });
+        }
     };
 });
 

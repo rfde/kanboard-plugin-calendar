@@ -10,3 +10,36 @@ td.fc-day-other {
 .fc-timegrid-now-indicator-container {
 	overflow: visible !important;
 }
+.calendar-view-container {
+	display: grid;
+    grid-gap: 0.5em;
+    grid-template-areas: "cal unsched";
+    grid-auto-columns: 80% 20%;
+}
+.js-calendar {
+	grid-area: cal;
+	max-height: calc(100vh - 100px);
+}
+#calendar-tasklist {
+	grid-area: unsched;
+	border: 1px solid #ddd;
+	max-height: calc(100vh - 100px);
+	overflow: auto;
+}
+#calendar-tasklist .fc-event-main {
+	color: black;
+	cursor: pointer;
+}
+#calendar-tasklist .fc-event {
+	margin: 0.2em;
+	padding: 0.2em;
+}
+#calendar-tasklist a {
+	text-decoration: none;
+	color: black;
+}
+.calendar-tasklist-title {
+	text-align: center;
+	background-color: #fbfbfb;
+	padding: 2px 4px;
+}

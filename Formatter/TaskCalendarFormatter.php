@@ -86,7 +86,7 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
             $events[] = array(
                 'timezoneParam' => $this->timezoneModel->getCurrentTimezone(),
                 'id' => $task['id'],
-                'title' => t('#%d', $task['id']).' '.$task['title'],
+                'title' => '[' . t('#%d', $task['id']) . '] '.$task['title'],
                 'backgroundColor' => $this->colorModel->getBackgroundColor($task['color_id']),
                 'borderColor' => $this->colorModel->getBorderColor($task['color_id']),
                 'textColor' => 'black',

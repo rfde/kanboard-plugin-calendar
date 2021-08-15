@@ -126,7 +126,7 @@ class CalendarController extends BaseController
                 $values['evt_end'] !== NULL
                 && $values['evt_start'] !== NULL
             ) {
-                // if we have both start and due date, update the task accordingly.
+                // both start and due date are present
                 $this->taskModificationModel->update(array(
                     'id' => $values['id'],
                     'date_started' => strtotime($values["evt_start"]),
