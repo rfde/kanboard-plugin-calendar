@@ -10,13 +10,24 @@
         </div>
         <?php
             $unscheduledTasks = $this->calendar->getUnscheduledTasks($project["id"]);
-            foreach ($unscheduledTasks as $task):
+            foreach ($unscheduledTasks as $swimlane) {
+                if (sizeof($swimlane["unscheduled_tasks"]) > 0) {
         ?>
-                <a href="<?= $this->url->href('TaskViewController', 'show', array('task_id' => $task["id"])) ?>">
-                    <div style="background-color: <?= $task["backgroundColor"] ?>; border: 1px solid <?= $task["borderColor"] ?>;" class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event" data-id="<?= $task["id"] ?>">
-                        <div class="fc-event-main"><?= $task["title"] ?></div>
+                    <div class="calendar-tasklist-title calendar-tasklist-title-swimlane">
+                        <?= $swimlane['name'] ?>
                     </div>
-                </a>
-        <?php endforeach ?>
+            <?php
+                    foreach (array_reverse($swimlane["unscheduled_tasks"]) as $task) {
+            ?>
+                        <a href="<?= $this->url->href('TaskViewController', 'show', array('task_id' => $task["id"])) ?>">
+                            <div style="background-color: <?= $task["backgroundColor"] ?>; border: 1px solid <?= $task["borderColor"] ?>;" class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event" data-id="<?= $task["id"] ?>">
+                                <div class="fc-event-main"><?= $task["title"] ?></div>
+                            </div>
+                        </a>
+            <?php
+                    } // foreach (task)
+                } // end if
+            } // foreach (swimlane)
+        ?>
     </div>
 </div>

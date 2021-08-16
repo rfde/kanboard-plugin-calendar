@@ -6,6 +6,7 @@ use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
 use Kanboard\Plugin\Calendar\Formatter\ProjectApiFormatter;
 use Kanboard\Plugin\Calendar\Formatter\TaskCalendarFormatter;
+use Kanboard\Plugin\Calendar\Formatter\UnscheduledTasksFormatter;
 
 class Plugin extends Base
 {
@@ -19,6 +20,10 @@ class Plugin extends Base
 
         $this->container['projectApiFormatter'] = $this->container->factory(function ($c) {
             return new ProjectApiFormatter($c);
+        });
+
+        $this->container['unscheduledTasksFormatter'] = $this->container->factory(function ($c) {
+            return new UnscheduledTasksFormatter($c);
         });
 
         $this->template->hook->attach('template:dashboard:page-header:menu', 'Calendar:dashboard/menu');

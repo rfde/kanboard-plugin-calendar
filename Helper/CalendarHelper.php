@@ -47,7 +47,7 @@ class CalendarHelper extends Base
             ->addCondition('(' . $startColumn . ' = \'0\' ' . ' OR ' . $startColumn . ' IS NULL) AND (date_due = \'0\' OR date_due IS NULL)');
 
         $unscheduledTasks = $unscheduledTasksQueryBuilder
-            ->format($this->taskCalendarFormatter->setColumns($startColumn, 'date_due', 'date_completed'));
+            ->format($this->unscheduledTasksFormatter->setColumns($startColumn, 'date_due', 'date_completed'));
 
         return $unscheduledTasks;
     }

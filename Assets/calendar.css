@@ -43,3 +43,6 @@ td.fc-day-other {
 	background-color: #fbfbfb;
 	padding: 2px 4px;
 }
+.calendar-tasklist-title-swimlane {
+	border-top:  1px solid #ddd;
+}
