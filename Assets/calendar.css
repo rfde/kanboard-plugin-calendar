@@ -47,3 +47,6 @@ td.fc-day-other {
 .calendar-tasklist-title-swimlane {
 	border-top:  1px solid #ddd;
 }
+.calendar-tasklist-plus {
+	float: right;
+}
