@@ -32,4 +32,5 @@
             } // foreach (swimlane)
         ?>
     </div>
+    <div id="board" data-task-creation-url="<?= $this->url->href('TaskCreationController', 'show', array('project_id'=> $project["id"])) ?>"></div>
 </div>
