@@ -15,7 +15,7 @@
                 if (sizeof($swimlane["unscheduled_tasks"]) > 0) {
         ?>
                     <div class="calendar-tasklist-title calendar-tasklist-title-swimlane">
-                        <?= $swimlane['name'] ?>
+                        <?= htmlspecialchars($swimlane['name']) ?>
                         <?= $this->modal->large('plus', '', 'TaskCreationController', 'show', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                     </div>
             <?php
@@ -23,7 +23,7 @@
             ?>
                         <a href="<?= $this->url->href('TaskViewController', 'show', array('task_id' => $task["id"])) ?>">
                             <div style="background-color: <?= $task["backgroundColor"] ?>; border: 1px solid <?= $task["borderColor"] ?>;" class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event" data-id="<?= $task["id"] ?>">
-                                <div class="fc-event-main"><?= $task["title"] ?></div>
+                                <div class="fc-event-main"><?= htmlspecialchars($task["title"]) ?></div>
                             </div>
                         </a>
             <?php
