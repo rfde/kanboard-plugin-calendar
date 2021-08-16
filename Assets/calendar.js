@@ -4,14 +4,14 @@ KB.component('calendar', function (containerElement, options) {
         week: 'timeGridWeek',
         day: 'timeGridDay'
     };
-
+    var calendar = null;
     this.render = function () {
         var mode = modeMapping["month"];
         if (window.location.hash) { // Check if hash contains mode
             var hashMode = window.location.hash.substr(1);
             mode = modeMapping[hashMode] || mode;
         }
-        var calendar = new FullCalendar.Calendar(containerElement, {
+        calendar = new FullCalendar.Calendar(containerElement, {
             locale: options.locale,
             initialView: mode,
             nowIndicator: true,
@@ -114,6 +114,22 @@ KB.component('calendar', function (containerElement, options) {
             });
         }
     };
+    
+    KB.onKey('m', function() {
+        if (calendar != null) {
+            calendar.changeView(modeMapping["month"]);
+        }
+    });
+    KB.onKey('w', function() {
+        if (calendar != null) {
+            calendar.changeView(modeMapping["week"]);
+        }
+    });
+    KB.onKey('d', function() {
+        if (calendar != null) {
+            calendar.changeView(modeMapping["day"]);
+        }
+    });
 });
 
 KB.on('dom.ready', function () {
