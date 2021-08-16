@@ -36,7 +36,10 @@ KB.component('calendar', function (containerElement, options) {
             events: options.checkUrl,
             views: {
                 timeGridWeek: {
-                    nowIndicator: true
+                    scrollTime: "08:00:00"
+                },
+                timeGridDay: {
+                    scrollTime: "08:00:00"
                 }
             },
             eventDrop: function(eventDropInfo) {
