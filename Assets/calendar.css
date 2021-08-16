@@ -29,6 +29,7 @@ td.fc-day-other {
 #calendar-tasklist .fc-event-main {
 	color: black;
 	cursor: pointer;
+	white-space: normal;
 }
 #calendar-tasklist .fc-event {
 	margin: 0.2em;
