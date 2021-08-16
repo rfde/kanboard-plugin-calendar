@@ -3,6 +3,9 @@
 namespace Kanboard\Plugin\Calendar\Helper;
 
 use Kanboard\Core\Base;
+use Kanboard\Filter\TaskProjectFilter;
+use Kanboard\Filter\TaskStatusFilter;
+use Kanboard\Model\TaskModel;
 
 /**
  * Calendar Helper
@@ -30,21 +33,22 @@ class CalendarHelper extends Base
         return '<div class="js-calendar" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';
     }
 
-    public function getUnscheduledTasks($projectId) {
-        $allTasks = $this->taskFinderModel->getAll($projectId);
-        $unscheduledTasks = array();
-        foreach (array_reverse($allTasks) as $task) {
-            if ((empty($task["date_due"]) && empty($task["date_start"]))) {
-                array_push($unscheduledTasks, $task);
-            }
-        }
-        return $unscheduledTasks;
-    }
+    public function getUnscheduledTasks($projectId)
+    {
+        $search = $this->userSession->getFilters($projectId);
+        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
 
-    public function getColors($colorId) {
-        return array(
-            "border_color" => $this->colorModel->getBorderColor($colorId),
-            "background_color" => $this->colorModel->getBackgroundColor($colorId)
-        );
+        $unscheduledTasksQueryBuilder = $this->taskLexer->build($search)
+            ->withFilter(new TaskProjectFilter($projectId))
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN));
+
+        $unscheduledTasksQueryBuilder
+            ->getQuery()
+            ->addCondition('(' . $startColumn . ' = \'0\' ' . ' OR ' . $startColumn . ' IS NULL) AND (date_due = \'0\' OR date_due IS NULL)');
+
+        $unscheduledTasks = $unscheduledTasksQueryBuilder
+            ->format($this->taskCalendarFormatter->setColumns($startColumn, 'date_due', 'date_completed'));
+
+        return $unscheduledTasks;
     }
 }
