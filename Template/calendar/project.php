@@ -7,6 +7,7 @@
     <div id="calendar-tasklist">
         <div class="calendar-tasklist-title">
             <strong><?= t('Unscheduled tasks') ?></strong>
+            <?= $this->modal->large('plus', '', 'TaskCreationController', 'show', array('project_id' => $project['id'])) ?>
         </div>
         <?php
             $unscheduledTasks = $this->calendar->getUnscheduledTasks($project["id"]);
@@ -15,6 +16,7 @@
         ?>
                     <div class="calendar-tasklist-title calendar-tasklist-title-swimlane">
                         <?= $swimlane['name'] ?>
+                        <?= $this->modal->large('plus', '', 'TaskCreationController', 'show', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                     </div>
             <?php
                     foreach (array_reverse($swimlane["unscheduled_tasks"]) as $task) {

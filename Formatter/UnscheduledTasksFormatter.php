@@ -26,16 +26,17 @@ class UnscheduledTasksFormatter extends TaskCalendarFormatter implements Formatt
         $unscheduledTasks = $this->query->findAll();
         if (sizeof($unscheduledTasks) > 0) {
             $result = array();
-            $projectId = $unscheduledTasks[0]["project_id"];
+            $projectId = $unscheduledTasks[0]['project_id'];
             $activeSwimlanes = $this->swimlaneModel->getAllByStatus($projectId);
             foreach ($activeSwimlanes as $activeSwimlane) {
-                $result[$activeSwimlane["id"]] = array(
-                    "name" => $activeSwimlane["name"],
-                    "unscheduled_tasks" => array()
+                $result[$activeSwimlane['id']] = array(
+                    'id' => $activeSwimlane['id'],
+                    'name' => $activeSwimlane['name'],
+                    'unscheduled_tasks' => array()
                 );
             }
             foreach ($unscheduledTasks as $unscheduledTask) {
-                $result[$unscheduledTask["swimlane_id"]]["unscheduled_tasks"][] = array(
+                $result[$unscheduledTask['swimlane_id']]['unscheduled_tasks'][] = array(
                     'id' => $unscheduledTask['id'],
                     'swimlane' => $unscheduledTask['swimlane_id'],
                     'title' => '[' . t('#%d', $unscheduledTask['id']) . '] '.$unscheduledTask['title'],
